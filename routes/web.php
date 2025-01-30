@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // Main
 Route::get('/', [MainController::class, 'index'])->name('main')->middleware([Check::class]);
+
 Route::prefix('admin')->middleware([Check::class])->group(function () {
     // Role
     Route::get('/role', [RoleController::class, 'index'])->name('role.index');

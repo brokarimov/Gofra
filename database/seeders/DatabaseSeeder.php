@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Permission;
+use App\Models\PermissionGroup;
 use App\Models\Role;
 use App\Models\User;
 use Hash;
@@ -29,6 +30,10 @@ class DatabaseSeeder extends Seeder
             'role_id' => $role->id
         ]);
 
+        $permissionGroup = PermissionGroup::create([
+            'name' => 'HR'
+        ]);
+
         $routes = Route::getRoutes();
         foreach($routes as $route){
             $key = $route->getName();
@@ -37,11 +42,14 @@ class DatabaseSeeder extends Seeder
 
                 Permission::create([
                     'name' => $name,
-                    'key' => $key
+                    'key' => $key,
+                    'group_id' => $permissionGroup->id
                 ]);
             }
         }
         $permissions = Permission::all()->pluck('id');
         $role->permissions()->attach($permissions);
     }
+
+    
 }
