@@ -30,24 +30,25 @@ class DatabaseSeeder extends Seeder
             'role_id' => $role->id
         ]);
 
-        $permissionGroup = PermissionGroup::create([
-            'name' => 'HR'
-        ]);
+        // $permissionGroup = PermissionGroup::create([
+        //     'name' => 'HR'
+        // ]);
 
-        $routes = Route::getRoutes();
-        foreach($routes as $route){
-            $key = $route->getName();
-            if($key && !str_starts_with($key, 'generated::') && $key !== 'storage.local'){
-                $name = ucfirst(str_replace('.', '-', $key));
+        // $routes = Route::getRoutes();
+        // foreach($routes as $route){
+        //     $key = $route->getName();
+        //     if($key && !str_starts_with($key, 'generated::') && $key !== 'storage.local'){
+        //         $name = ucfirst(str_replace('.', '-', $key));
 
-                Permission::create([
-                    'name' => $name,
-                    'key' => $key,
-                    'group_id' => $permissionGroup->id
-                ]);
-            }
-        }
+        //         Permission::create([
+        //             'name' => $name,
+        //             'key' => $key,
+        //             'group_id' => $permissionGroup->id
+        //         ]);
+        //     }
+        // }
         $permissions = Permission::all()->pluck('id');
+        
         $role->permissions()->attach($permissions);
     }
 

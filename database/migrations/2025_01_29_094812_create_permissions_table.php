@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('key');
             $table->foreignId('group_id')->constrained('permission_groups')->onDelete('cascade');
+            $table->string('status')->default(1);
             $table->timestamps();
         });
     }

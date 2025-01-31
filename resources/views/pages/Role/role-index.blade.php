@@ -43,6 +43,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Status</th>
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -51,6 +52,9 @@
                     <tr>
                         <td>{{ $model->id }}</td>
                         <td>{{ $model->name }}</td>
+                        <td>
+                            <a href="{{route('role.status', $model->id)}}" class="btn btn-outline-{{$model->status == 1 ? 'primary' : 'danger'}}">{{$model->status == 1 ? 'Active': 'Inactive'}}</a>
+                        </td>
                         <td>
                             <!-- Delete Button -->
                             <a href="{{route('role.delete', $model->id)}}" type="button" class="btn btn-outline-danger">
@@ -93,49 +97,13 @@
                                 </div>
                             </div>
 
-
-
-
-
-                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#permissionRoleModal{{ $model->id }}">
+                            <a href="{{route('permission.index', $model->id)}}" class="btn btn-outline-info">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock" viewBox="0 0 16 16">
                                     <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2M3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1z" />
                                 </svg>
-                            </button>
+                            </a>
 
-                            <!-- Give Permission Modal -->
-                            <div class="modal fade" id="permissionRoleModal{{ $model->id }}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5">Give Permission</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{route('permission.store', $model->id)}}" method="POST">
-                                                @csrf
-                                                <div class="select2-purple">
-                                                    <select class="select2" multiple data-placeholder="Select a Permission"
-                                                        data-dropdown-css-class="select2-purple" style="width: 100%;" name="permissions[]">
 
-                                                        @foreach ($permissions as $permission)
-                                                        <option value="{{ $permission->id }}"
-                                                            @if ($rolePermissions->where('role_id', $model->id)->where('permission_id', $permission->id)->count() > 0) selected @endif>
-                                                            {{ $permission->name }}
-                                                        </option>
-                                                        @endforeach
-
-                                                    </select>
-
-                                                </div>
-
-                                                <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </td>
                     </tr>
                     @endforeach

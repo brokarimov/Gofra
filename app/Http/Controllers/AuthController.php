@@ -26,13 +26,13 @@ class AuthController extends Controller
         if(Auth::attempt(['email'=>$data['email'], 'password'=>$data['password']])){
             return redirect()->route('main');
         }else{
-            return redirect('/login');
+            return redirect()->route('login');
         }
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

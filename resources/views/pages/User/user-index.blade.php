@@ -72,6 +72,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Status</th>
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -82,6 +83,9 @@
                         <td>{{ $model->name }}</td>
                         <td>{{ $model->email }}</td>
                         <td>{{ $model->roles->name }}</td>
+                        <td>
+                            <a href="{{route('user.status', $model->id)}}" class="btn btn-outline-{{$model->status == 1 ? 'primary' : 'danger'}}">{{$model->status == 1 ? 'Active': 'Inactive'}}</a>
+                        </td>
 
                         <td>
                             <!-- Delete Button -->

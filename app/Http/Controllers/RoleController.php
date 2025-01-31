@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
+use App\Models\PermissionGroup;
 use App\Models\Role;
 use App\Models\RolePermission;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class RoleController extends Controller
         $roles = Role::orderBy('id', 'desc')->paginate(10);
         $rolePermissions = RolePermission::all();
         $permissions = Permission::all();
-        return view('pages.Role.role-index', ['models' => $roles , 'permissions' => $permissions, 'rolePermissions' => $rolePermissions]);
+        return view('pages.Role.role-index', ['models' => $roles, 'permissions' => $permissions, 'rolePermissions' => $rolePermissions]);
     }
 
     public function store(Request $request)
@@ -44,5 +45,15 @@ class RoleController extends Controller
         return back();
     }
 
-    
+    public function status(Role $role)
+    {
+        if ($role->status == 1) {
+            $role->status = 0;
+            $role->save();
+        } elseif ($role->status == 0) {
+            $role->status = 1;
+            $role->save();
+        }
+        return back();
+    }
 }

@@ -55,7 +55,7 @@
                         <img src="{{asset("admin/dist/img/user2-160x160.jpg")}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">{{auth()->check() ? auth()->user()->name : "Alexander Pierce"}}</a>
                     </div>
                 </div>
                 <div class="form-inline">
@@ -92,11 +92,18 @@
                                         <p>User</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('permission-group.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>Permission Group</p>
+                                    </a>
+                                </li>
+                                
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a href="/logout" class="nav-link">
+                            <a href="{{route('logout')}}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>Logout</p>
                             </a>

@@ -19,20 +19,21 @@ class Check
     {
         $routeName = $request->route()->getName();
 
-        if (Auth::check()) {
-            
-            if (Permission::where('key', $routeName)->first()) {
-                $role = Auth::user()->roles;
+        if (Auth::check() && Auth::user()->status == 1) {
 
-                if ($role->permissions()->where('key', $routeName)->exists()) {
-                    return $next($request);
-                } else {
-                    abort(403);
+            if (Permission::where('key', $routeName)->where('status', 1)->first()) {
+                $role = Auth::user()->roles;
+                if ($role->status == 1) {
+                    if ($role->permissions()->where('key', $routeName)->exists()) {
+                        return $next($request);
+                    } else {
+                        abort(403);
+                    }
                 }
             } else {
                 abort(404);
             }
         }
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

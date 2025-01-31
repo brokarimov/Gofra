@@ -46,4 +46,15 @@ class UserController extends Controller
         $user->delete();
         return back();
     }
+    public function status(User $user)
+    {
+        if ($user->status == 1) {
+            $user->status = 0;
+            $user->save();
+        } elseif ($user->status == 0) {
+            $user->status = 1;
+            $user->save();
+        }
+        return back();
+    }
 }
