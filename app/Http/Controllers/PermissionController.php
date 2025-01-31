@@ -35,5 +35,17 @@ class PermissionController extends Controller
         return redirect()->route('permission.index', $role->id);
     }
 
-    
+    public function status(PermissionGroup $group, Request $request)
+    {
+        $allPermissionIDs = Permission::where('group_id', $group->id)->pluck('id')->toArray();
+
+        $checkedIDs = $request->permissions ?? [];
+
+        Permission::whereIn('id', $checkedIDs)->update(['status' => 1]);
+
+        $uncheckedIDs = array_diff($allPermissionIDs, $checkedIDs);
+        Permission::whereIn('id', $uncheckedIDs)->update(['status' => 0]);
+
+        return back();
+    }
 }

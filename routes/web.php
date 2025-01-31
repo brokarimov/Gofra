@@ -39,6 +39,9 @@ Route::prefix('admin')->middleware([Check::class])->group(function () {
     // Permission
     Route::post('/permission-store/{role}', [PermissionController::class, 'givePermission'])->name('permission.store');
     Route::get('/permission-index/{role}', [PermissionController::class, 'index'])->name('permission.index');
+    Route::post('/permission-status/{group}', [PermissionController::class, 'status'])->name('permission.status');
+
+    // Permission-group
     Route::get('/permission-group-index', [PermissionGroupController::class, 'index'])->name('permission-group.index');
     Route::get('/permission-group-status/{group}', [PermissionGroupController::class, 'status'])->name('permission-group.status');
 
