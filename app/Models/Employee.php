@@ -17,4 +17,14 @@ class Employee extends Model
         'daily_time',
         'status',
     ];
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function salary()
+    {
+        return $this->belongsTo(Salary::class, 'salary_type');
+    }
 }

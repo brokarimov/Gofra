@@ -10,4 +10,8 @@ class Salary extends Model
         'name',
         'quantity'
     ];
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'salary_type');
+    }
 }
