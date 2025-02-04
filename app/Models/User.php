@@ -59,4 +59,9 @@ class User extends Authenticatable
             $query->where('key', $permission);
         })->exists();
     }
+
+    public function storages()
+    {
+        return $this->hasMany(Storage::class, 'user_id');
+    }
 }

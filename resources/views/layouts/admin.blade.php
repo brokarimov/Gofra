@@ -145,6 +145,14 @@
                                     </a>
                                 </li>
                                 @endif
+                                @if (auth()->user()->hasPermission('storage.index'))
+                                <li class="nav-item">
+                                    <a href="{{ route('storage.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>Storage</p>
+                                    </a>
+                                </li>
+                                @endif
 
                             </ul>
                         </li>

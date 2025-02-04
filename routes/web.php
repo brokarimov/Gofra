@@ -8,6 +8,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PermissionGroupController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Check;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +78,12 @@ Route::prefix('HR')->middleware([Check::class])->group(function () {
     Route::get('/employee-delete/{employee}', [EmployeeController::class, 'delete'])->name('employee.delete');
     Route::get('/employee-status/{employee}', [EmployeeController::class, 'status'])->name('employee.status');
 
+    // Storage
+    Route::get('/storage', [StorageController::class, 'index'])->name('storage.index');
+    Route::post('/storage-store', [StorageController::class, 'store'])->name('storage.store');
+    Route::put('/storage-update/{storage}', [StorageController::class, 'update'])->name('storage.update');
+    Route::get('/storage-delete/{storage}', [StorageController::class, 'delete'])->name('storage.delete');
+    Route::get('/storage-status/{storage}', [StorageController::class, 'status'])->name('storage.status');
 
 });
 
