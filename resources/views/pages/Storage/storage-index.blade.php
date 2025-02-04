@@ -62,6 +62,9 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>User</th>
+                        @if (auth()->user()->hasPermission('storage.status'))
+                        <th>Status</th>
+                        @endif
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -71,6 +74,13 @@
                         <td>{{ $model->id }}</td>
                         <td>{{ $model->name }}</td>
                         <td>{{ $model->user->name}}</td>
+                        <td>
+                            @if (auth()->user()->hasPermission('storage.status'))
+                            <a href="{{route('storage.status', $model->id)}}" class="btn btn-outline-{{$model->status == 1 ? 'primary' : 'danger'}}">{{$model->status == 1 ? 'Active': 'Inactive'}}</a>
+
+                            @endif
+
+                        </td>
 
                         <td>
                             @if (auth()->user()->hasPermission('storage.delete'))
