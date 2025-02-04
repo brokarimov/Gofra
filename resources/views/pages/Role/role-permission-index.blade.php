@@ -3,29 +3,19 @@
 @section('content')
 <div class="col-12">
     <h1>Permission Management</h1>
-    <h3>Role: {{ $role->name }}</h3>
+    <h3>Role: {{ ucfirst($role->name) }}</h3>
 
     {{-- Permissions Assignment Form --}}
     @if(isset($permissionGroups))
     <form action="{{ route('permission.store', $role->id) }}" method="POST">
         @csrf
         <div class="row mt-4">
-            {{-- Display Groups in One Row --}}
-            <div class="col-12">
-                <div class="row">
-                    @foreach ($permissionGroups as $group)
-                    <div class="col-md-4 text-center">
-                        <h5>{{ $group->name }}</h5>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-
             {{-- Display Permissions Below Each Group --}}
             <div class="col-12 mt-2">
                 <div class="row">
                     @foreach ($permissionGroups as $group)
                     <div class="col-md-4">
+                        <h5>{{ ucfirst($group->name) }}</h5>
                         <div class="border p-2 rounded">
                             @foreach ($group->permissions as $permission)
                             <div class="form-check">

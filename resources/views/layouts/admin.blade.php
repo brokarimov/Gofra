@@ -80,28 +80,74 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @if (auth()->user()->hasPermission('role.index'))
                                 <li class="nav-item">
                                     <a href="{{ route('role.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-th"></i>
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p>Role</p>
                                     </a>
                                 </li>
+                                @endif
+
+                                @if (auth()->user()->hasPermission('user.index'))
                                 <li class="nav-item">
                                     <a href="{{ route('user.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-th"></i>
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p>User</p>
                                     </a>
                                 </li>
+                                @endif
+
+                                @if (auth()->user()->hasPermission('permission-group.index'))
                                 <li class="nav-item">
                                     <a href="{{ route('permission-group.index') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-th"></i>
+                                        <i class="nav-icon fas fa-table"></i>
                                         <p>Permission Group</p>
                                     </a>
                                 </li>
-                                
+                                @endif
+
                             </ul>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    HR
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                @if (auth()->user()->hasPermission('department.index'))
+                                <li class="nav-item">
+                                    <a href="{{ route('department.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>Department</p>
+                                    </a>
+                                </li>
+
+                                @endif
+                                @if (auth()->user()->hasPermission('salary.index'))
+                                <li class="nav-item">
+                                    <a href="{{ route('salary.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>Salary</p>
+                                    </a>
+                                </li>
+                                @endif
+
+                                @if (auth()->user()->hasPermission('employee.index'))
+                                <li class="nav-item">
+                                    <a href="{{ route('employee.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>Employee</p>
+                                    </a>
+                                </li>
+                                @endif
+
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <a href="{{route('logout')}}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
@@ -119,7 +165,6 @@
             <section class="content">
                 <div class="container-fluid">
                     @yield('content')
-
                 </div>
             </section>
         </div>

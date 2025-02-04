@@ -10,7 +10,7 @@ class PermissionGroupController extends Controller
 {
     public function index()
     {
-        $permissionGroups = PermissionGroup::all();
+        $permissionGroups = PermissionGroup::orderBy('id', 'desc')->paginate(10);
         return view('pages.Permission.permission-group-index', ['models' => $permissionGroups]);
     }
 
